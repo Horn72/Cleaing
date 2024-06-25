@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h1 class="info_text">아래 반납 정보를 <br>입력해주세요</h1>
+
+    <form action="" id="dataForm">
+        <div class="box">
+            <p>이름</p>
+            <input type="text" name="name" id="name">
+        </div>
+
+        <div class="box">
+            <p>전화번호</p>
+            <input type="text" name="phone_num" id="phone_num">
+        </div>
+
+        <div class="box">
+            <p>주소</p>
+            <input type="text" name="address" id="address">
+        </div>
+
+        <div class="box">
+            <p>현관 비밀번호</p>
+            <input type="password" name="secret_num" id="secret_num">
+        </div>
+
+        <button class="return_button" id="return_button">반납하기</button>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataForm input').on('input', function(){
+                const name = $('#name').val();
+                const address = $('#address').val();
+                const secret_num = $('#secret_num').val();
+                const phone_num = $('#phone_num').val();
+                const submitButton = $('#return_button');
+
+                if (name && address && secret_num&&phone_num) {
+                    submitButton.addClass('active');
+                    $('html, body').animate({ scrollTop: $(document).height() }, 3000);
+                } else {
+                    submitButton.removeClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
