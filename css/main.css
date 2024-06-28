@@ -19,13 +19,15 @@ p {
 .return_button{
     margin-left: 24px;
     margin-top: 50px;
+    margin-bottom: 100px;
     width: 90%;
     height: 55px;
-    background-color: #0043CE;
+    background-color: #585858;
     border-radius: 10px;
     border: none;
     color: #F4F4F4;
     box-shadow:  0 4px 4px rgba(0,0,0,0.30), 0 4px 4px rgba(0,0,0,0.22);
+    font-size: 16px;
 }
 input {
     width: 100%;
@@ -37,9 +39,7 @@ input {
     padding-left: 10px;
     box-sizing: border-box;
 }
-.return_button {
-    background-color: #585858; /* 초기 버튼 색상 */
-}
+
 .return_button.active {
     background-color: #0043CE; /* 모든 입력 필드가 채워졌을 때 버튼 색상 */
 }
