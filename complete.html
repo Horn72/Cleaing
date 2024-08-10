@@ -4,53 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width">
     <title>Document</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/complete.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-
-    <h1 class="info_text">아래 반납 정보를 <br>입력해주세요</h1>
-
-    <form action="" id="dataForm">
-        <div class="box">
-            <p style="font-size: 15;">이름</p>
-            <input type="text" name="name" id="name">
-        </div>
-
-        <div class="box">
-            <p style="font-size: 15;">전화번호</p>
-            <input type="text" name="phone_num" id="phone_num">
-        </div>
-
-        <div class="box">
-            <p style="font-size: 15;">주소</p>
-            <input type="text" name="address" id="address">
-        </div>
-
-        <div class="box">
-            <p style="font-size: 15;">현관 비밀번호</p>
-            <input type="password" name="secret_num" id="secret_num">
-        </div>
-
-        <button class="return_button" id="return_button">반납하기</button>
-    </form>
-
     <script>
         $(document).ready(function() {
-            $('#dataForm input').on('input', function(){
-                const name = $('#name').val();
-                const address = $('#address').val();
-                const secret_num = $('#secret_num').val();
-                const phone_num = $('#phone_num').val();
-                const submitButton = $('#return_button');
+            // 현재 날짜와 시간 가져오기
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = ("0" + (now.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 맞춤
+            var day = ("0" + now.getDate()).slice(-2); // 두 자리로 맞춤
+            var hours = ("0" + now.getHours()).slice(-2); // 두 자리로 맞춤
+            var minutes = ("0" + now.getMinutes()).slice(-2); // 두 자리로 맞춤
+            var seconds = ("0" + now.getSeconds()).slice(-2); // 두 자리로 맞춤
 
-                if (name && address && secret_num&&phone_num) {
-                    submitButton.addClass('active');
-                } else {
-                    submitButton.removeClass('active');
-                }
-            });
+            // YYYY-MM-DD HH:MM:SS 형식으로 날짜와 시간 포맷팅
+            var formattedDateTime = year + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+
+            // time 클래스에 날짜와 시간 추가
+            $(".time").append(formattedDateTime);
         });
     </script>
+</head>
+<body>
+    <h1 class="info_text">반납 신청이 정상적으로 <br>등록되었습니다.</h1>
+    <p class="time">반납 신청 시간 : </p>
 </body>
 </html>

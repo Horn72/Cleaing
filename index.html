@@ -11,46 +11,78 @@
 
     <h1 class="info_text">아래 반납 정보를 <br>입력해주세요</h1>
 
-    <form action="" id="dataForm">
+    <form id="dataForm">
         <div class="box">
-            <p style="font-size: 15;">이름</p>
-            <input type="text" name="name" id="name">
+            <p style="font-size: 15px;">이름</p>
+            <input inputmode="text" type="text" name="name" id="name">
         </div>
 
         <div class="box">
-            <p style="font-size: 15;">전화번호</p>
-            <input type="text" name="phone_num" id="phone_num">
+            <p style="font-size: 15px;">전화번호</p>
+            <input inputmode="tel" type="text" name="phone_num" id="phone_num">
         </div>
 
         <div class="box">
-            <p style="font-size: 15;">주소</p>
-            <input type="text" name="address" id="address">
+            <p style="font-size: 15px;">주소</p>
+            <input inputmode="" type="text" name="address" id="address" placeholder="도로명 주소와 동/호수를 적어주세요">
         </div>
 
         <div class="box">
-            <p style="font-size: 15;">현관 비밀번호</p>
-            <input type="password" name="secret_num" id="secret_num">
+            <p style="font-size: 15px;">현관 비밀번호</p>
+            <input inputmode="text" type="password" name="secret_num" id="secret_num">
         </div>
 
-        <button class="return_button" id="return_button">반납하기</button>
+        <button type="button" class="return_button" id="return_button" onclick="location.href='complete.html'">반납하기</button>
     </form>
 
     <script>
         $(document).ready(function() {
+            // 공통 함수: 입력된 데이터를 가져옴
+            function getFormData() {
+                return {
+                    name: $('#name').val(),
+                    phone_num: $('#phone_num').val(),
+                    address: $('#address').val(),
+                    secret_num: $('#secret_num').val()
+                };
+            }
+        
+            // 입력 이벤트 핸들러: 모든 필드가 채워졌는지 확인하고 버튼 활성화
             $('#dataForm input').on('input', function(){
-                const name = $('#name').val();
-                const address = $('#address').val();
-                const secret_num = $('#secret_num').val();
-                const phone_num = $('#phone_num').val();
+                const { name, phone_num, address, secret_num } = getFormData();
                 const submitButton = $('#return_button');
-
-                if (name && address && secret_num&&phone_num) {
+        
+                if (name && phone_num && address && secret_num) {
                     submitButton.addClass('active');
                 } else {
                     submitButton.removeClass('active');
                 }
             });
+        
+            // 버튼 클릭 이벤트 핸들러: 데이터 전송
+            $('#return_button').on('click', function() {
+                const { name, phone_num, address, secret_num } = getFormData();
+        
+                if (name && phone_num && address && secret_num) {
+                    $.ajax({
+                        url: 'http://localhost:3000/submit',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ name, phone_num, address, secret_num }),
+                        success: function(response) {
+                            alert('Data submitted successfully');
+                        },
+                        error: function(xhr, status, error) {
+                            console.error('Error submitting data:', error);
+                            alert('Error submitting data');
+                        }
+                    });
+                } else {
+                    alert('모든 필드를 입력해주세요');
+                }
+            });
         });
+        
     </script>
 </body>
 </html>

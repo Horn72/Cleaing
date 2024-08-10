@@ -1,0 +1,5 @@
+db 인스턴스 식별자 : database-1
+마스터 사용자 이름 : admin
+마스터 암호 : jinwoo8228
+
+vpc-0bf2fff2967080d71
